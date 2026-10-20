@@ -34,10 +34,11 @@ export default function Graph({ data, indicators, open, compact = false }: { dat
     return () => { observer.disconnect(); graph.destroy(); cy.current = null; };
   }, [elements, data, indicators, selected, open, compact]);
   return <div className="graph-wrap">
-    {!compact && <div className="filters"><label>Aktör odağı<select value={selected} onChange={e => setFocus(e.target.value)}>{actors.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select></label><label>Düğüm türü<select value={kind} onChange={e => setKind(e.target.value)}><option value="all">Tüm ilişkili varlıklar</option><option value="technique">MITRE Technique</option><option value="campaign">Campaign</option><option value="indicator">Indicator • bağımsız</option></select></label><span className="muted">En fazla 60 kaynak ilişkisi · {kind === 'indicator' ? 'İlk 40 IOC; ilişki atfı yok' : 'Ok yönü: kaynak → hedef'}</span></div>}
+    {!compact && <div className="filters"><label>Aktör odağı<select value={selected} onChange={e => setFocus(e.target.value)}>{actors.map(a => <option key={a.id} value={a.id}>{a.name}</option>)}</select></label><label>Düğüm türü<select value={kind} onChange={e => setKind(e.target.value)}><option value="all">Tüm ilişkili varlıklar</option><option value="technique">MITRE Tekniği</option><option value="campaign">Kampanya</option><option value="indicator">IOC • bağımsız</option></select></label><span className="muted">En fazla 60 kaynak ilişkisi · {kind === 'indicator' ? 'İlk 40 IOC; ilişki atfı yok' : 'Ok yönü: kaynak → hedef'}</span></div>}
     <div ref={container} className={compact ? 'graph compact' : 'graph'} role="img" aria-label="Kaynak kayıtlarından oluşturulmuş interaktif tehdit grafiği" />
     {!elements.length && <div className="empty"><Network />Bu seçim için kaynakta kayıt yok.</div>}
     <div className="graph-controls"><button aria-label="Grafiği yakınlaştır" onClick={() => cy.current?.zoom(cy.current.zoom() * 1.25)}><Plus size={16}/></button><button aria-label="Grafiği uzaklaştır" onClick={() => cy.current?.zoom(cy.current.zoom() / 1.25)}><Minus size={16}/></button><button aria-label="Grafiği sığdır" onClick={() => cy.current?.fit(undefined, 40)}><Maximize2 size={16}/></button></div>
-    <div className="graph-legend"><span><i className="dot purple"/>Threat Actor</span><span><i className="dot cyan"/>Technique</span><span><i className="dot amber"/>Campaign</span>{!compact && <span><i className="dot green"/>Indicator</span>}</div>
+    <div className="graph-legend"><span><i className="dot purple"/>Tehdit Aktörü</span><span><i className="dot cyan"/>Teknik</span><span><i className="dot amber"/>Kampanya</span>{!compact && <span><i className="dot green"/>IOC</span>}</div>
   </div>;
 }
+

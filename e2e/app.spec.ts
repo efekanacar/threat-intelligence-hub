@@ -1,9 +1,9 @@
 import { test, expect } from '@playwright/test';
 test('modüller, arama, analiz, dışa aktarma ve graph çalışır', async ({ page }, testInfo) => {
   const errors:string[]=[]; page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('/'); await expect(page.getByRole('heading',{name:'İstihbarat Genel Bakışı'})).toBeVisible();
-  await expect(page.getByText('IOC Tür Dağılımı',{exact:true})).toBeVisible();
-  await expect(page.locator('.graph canvas').first()).toBeVisible();
+  await page.goto('/'); await expect(page.getByRole('heading',{name:'Ne araştırmak istiyorsunuz?'})).toBeVisible();
+  await expect(page.locator('.task-card')).toHaveCount(3);
+  await expect(page.locator('nav a[href="#graph"]')).not.toBeVisible();
   await page.screenshot({path:`work/${testInfo.project.name}-dashboard.png`,fullPage:true});
   const nav = async(id:string)=>{await page.goto(`/#${id}`); await expect(page.locator('main .panel').first()).toBeVisible();};
   await nav('iocs'); await expect(page.getByRole('heading',{name:'Gösterge Kütüphanesi'})).toBeVisible();
@@ -14,11 +14,11 @@ test('modüller, arama, analiz, dışa aktarma ve graph çalışır', async ({ p
   await page.locator('.value-button').first().click(); await expect(page.getByRole('dialog')).toBeVisible(); await page.keyboard.press('Escape'); await expect(page.getByRole('dialog')).toHaveCount(0);
   await nav('attack'); await page.getByLabel('Hızlı arama').fill('T1059'); await expect(page.locator('.technique-list')).toContainText('T1059'); await page.locator('.technique-list>button').first().click(); await expect(page.getByRole('dialog')).toContainText('Kaynak Bağlantıları'); await page.keyboard.press('Escape');
   await nav('actors'); await page.getByLabel('Hızlı arama').fill('APT29'); await expect(page.locator('.actor-card')).toHaveCount(1); await page.locator('.actor-card').click(); await expect(page.getByRole('dialog')).toContainText('Bilinen Takma İsimler'); await page.keyboard.press('Escape');
-  await nav('analyzer'); await page.getByLabel('Analiz edilecek metin').fill('192.0.2.1 example.org CVE-2024-12345'); await page.getByRole('button',{name:'Analiz Et',exact:true}).click(); await expect(page.locator('tbody')).toContainText('Eşleşme yok'); await page.getByRole('button',{name:'Yerel Veri Setine Ekle'}).click(); await expect(page.locator('tbody')).toContainText('Yalnızca kullanıcı verisi');
+  await nav('analyzer'); await page.getByLabel('Analiz edilecek metin').fill('192.0.2.1 example.org CVE-2024-12345'); await page.getByRole('button',{name:'Kontrol Et',exact:true}).click(); await expect(page.locator('tbody')).toContainText('Eşleşme yok'); await page.getByRole('button',{name:'Listeye Ekle'}).click(); await expect(page.locator('tbody')).toContainText('Yalnızca kullanıcı verisi');
   await page.getByLabel('IOC dosyası yükle').setInputFiles({name:'test.csv',mimeType:'text/csv',buffer:Buffer.from('value\nexample.org\nnot-valid\n')}); await expect(page.getByRole('status')).toContainText('1 geçersiz satır');
   await page.getByLabel('IOC dosyası yükle').setInputFiles({name:'bad.json',mimeType:'application/json',buffer:Buffer.from('{broken')}); await expect(page.getByRole('alert')).toBeVisible();
   await nav('graph'); await expect(page.locator('.graph canvas').first()).toBeVisible(); await page.getByRole('combobox',{name:'Düğüm türü'}).selectOption('indicator'); await page.getByRole('button',{name:'Grafiği yakınlaştır'}).click(); await page.getByRole('button',{name:'Grafiği sığdır'}).click();
-  await nav('sources'); await expect(page.getByRole('heading',{name:'IPsum',exact:true})).toBeVisible(); await expect(page.getByText('Unlicense',{exact:true})).toBeVisible();
+  await nav('sources'); await expect(page.getByRole('heading',{name:'IPsum',exact:true})).toBeVisible(); await page.locator('.source-card').filter({has:page.getByRole('heading',{name:'IPsum',exact:true})}).getByText('Kaynak bilgileri',{exact:true}).click(); await expect(page.getByText('Unlicense',{exact:true})).toBeVisible();
   expect(errors).toEqual([]);
   if(testInfo.project.name==='mobile') expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
