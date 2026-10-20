@@ -36,4 +36,5 @@ Resmi kaynaklardan 20 Ekim 2026 tarihinde indirildi. Tam indirme zamanları, ups
 
 ## Doğrulama sınırları
 
-Tarayıcı kontrolleri Chromium ve mobil cihaz emülasyonunda yapıldı; fiziksel cihaz, Safari veya Firefox testi yapılmadı. GitHub Actions workflow ve Pages yapılandırması projede hazırdır; uzak bir GitHub reposuna push veya gerçek Pages yayını bu teslimatta yapılmadı. Feed erişiminin gelecekte sürmesi garanti edilmez; kesintide koruma davranışı test edildi. Testler bütün IOC’lerin zararlı olduğunu doğrulamaz.
+Tarayıcı kontrolleri Chromium ve mobil cihaz emülasyonunda yapıldı; fiziksel cihaz, Safari veya Firefox testi yapılmadı. Proje public GitHub reposuna aktarılmıştır; güncel bulut testleri ve Pages yayın durumu README içindeki Actions bağlantısından izlenebilir. Feed erişiminin gelecekte sürmesi garanti edilmez; kesintide koruma davranışı test edildi. Testler bütün IOC’lerin zararlı olduğunu doğrulamaz.
+

@@ -1,5 +1,7 @@
 # Threat Intelligence Hub
 
+**[Web uygulamasını aç](https://efekanacar.github.io/threat-intelligence-hub/)** · [Kaynak kod](https://github.com/efekanacar/threat-intelligence-hub) · [Güncelleme ve yayın durumu](https://github.com/efekanacar/threat-intelligence-hub/actions/workflows/pages.yml)
+
 ## Bu sistem ne işe yarar?
 
 Threat Intelligence Hub, siber tehditlerle ilgili açık kaynak bilgileri tek bir Türkçe arayüzde incelemenizi sağlar. Şüpheli bir IP adresini, alan adını, bağlantıyı veya dosya özetini araştırabilir; bilinen tehdit gruplarını ve kullandıkları saldırı tekniklerini görebilirsiniz.
