@@ -26,4 +26,4 @@ Yüklediğiniz dosyalar dışarı gönderilmez. Eklediğiniz kullanıcı veriler
 
 Kaynakların gerekli kullanım koşulları ve atıfları korunur: [MITRE](public/licenses/MITRE.txt), [IPsum](public/licenses/IPsum.txt), [Feodo Tracker](https://feodotracker.abuse.ch/blocklist/#tos). Proje MITRE tarafından desteklenmiş veya onaylanmış değildir.
 
-[Güncelleme durumu](https://github.com/efekanacar/threat-intelligence-hub/actions/workflows/pages.yml) · [Geliştiriciler için teknik notlar](docs/TECHNICAL.md)
+[Güncelleme durumu](https://github.com/efekanacar/threat-intelligence-hub/actions/workflows/pages.yml)
